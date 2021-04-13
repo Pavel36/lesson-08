@@ -1,7 +1,7 @@
-import {ApiService} from "../services/ApiService";
-import {Publisher} from "../types/publisher";
+import { ApiService } from '../services/ApiService'
+import { Publisher } from '../types/publisher'
 
-export const apiLanguageGetAll = async (): Promise<Publisher.Data[]> => {
-  const { data } = await ApiService(true).get<Publisher.Data[]>('/languages')
+export const apiPublisherGetAll = async (params: Publisher.All.Search): Promise<Publisher.Data[]> => {
+  const { data } = await ApiService(true).get<Publisher.Data[]>('/publishers', { params })
   return data
 }
