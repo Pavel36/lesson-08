@@ -3,4 +3,9 @@ export declare namespace Author {
     id: number;
     name: string;
   }
+  namespace All {
+    interface Search {
+      search?: string;
+    }
+  }
 }

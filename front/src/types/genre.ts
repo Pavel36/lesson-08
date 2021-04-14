@@ -3,4 +3,9 @@ export declare namespace Genre {
     id: number;
     name: string;
   }
+  namespace All {
+    interface Search {
+      search?: string;
+    }
+  }
 }
