@@ -1,21 +1,21 @@
 import block from 'bem-cn'
-import React, {ChangeEventHandler, useCallback} from 'react'
-import './GenresPage.css'
-import {debounce} from "lodash";
-import {Card} from "../../../components/Card/Card";
-import {Input} from "../../../components/Input/Input";
-import {Spinner} from "../../../components/Spinner/Spinner";
-import {useGenreGetAll} from "../../../hooks/useGenreGetAll";
-import {BasePageProps} from "../../../types/base";
-import {Link} from "react-router-dom";
+import { debounce } from 'lodash'
+import React, { ChangeEventHandler, useCallback } from 'react'
+import { Link } from 'react-router-dom'
+import { Card } from '../../components/Card/Card'
+import { Input } from '../../components/Input/Input'
+import { Spinner } from '../../components/Spinner/Spinner'
+import { usePublisherGetAll } from '../../hooks/usePublisherGetAll'
+import { BasePageProps } from '../../types/base'
+import './PublisherAllPage.css'
 
 interface Props extends BasePageProps {
 }
 
-const b = block('genre-page')
+const b = block('publisher-all-page')
 
-export const GenresPage: React.FC<Props> = () => {
-  const { data, loading, setSearch } = useGenreGetAll()
+export const PublisherAllPage: React.FC<Props> = () => {
+  const { data, loading, setSearch } = usePublisherGetAll()
 
   const handlerChange = useCallback<ChangeEventHandler<HTMLInputElement>>(event => {
     setSearch(event.target.value)
@@ -24,7 +24,7 @@ export const GenresPage: React.FC<Props> = () => {
   const debounceHandlerChange = useCallback(debounce(handlerChange, 500), [handlerChange])
 
   return (
-    <Card title={'Жанры'} className={b()}>
+    <Card title={'Издательства'} className={b()}>
       <div className={b('content')}>
         <Input
           name={'search'}
@@ -39,7 +39,7 @@ export const GenresPage: React.FC<Props> = () => {
           <ul className={b('list')}>
             {data.map(item => (
               <li key={item.id}>
-                {item.name}
+                <Link to={`/ref/publishers/${item.id}`}>{item.name}</Link>
               </li>
             ))}
           </ul>
